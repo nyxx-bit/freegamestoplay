@@ -2,8 +2,8 @@ import React from "react";
 
 const GameItem = ({ item }) => {
   const OnClick = () => {
-    window.location.href = item.game_url
-  }
+    window.location.href = item.game_url;
+  };
 
   return (
     <div className="card">

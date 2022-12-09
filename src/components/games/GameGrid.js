@@ -11,9 +11,7 @@ const GameGrid = ({ items, isLoading, filteredResult, searchInput }) => {
         ? filteredResult.map((item) => (
             <GameItem key={item.id} item={item}></GameItem>
           ))
-        : items.map((item) => (
-            <GameItem key={item.id} item={item}></GameItem>
-          ))}
+        : items.map((item) => <GameItem key={item.id} item={item}></GameItem>)}
     </section>
   );
 };
