@@ -4,12 +4,21 @@ import Header from "../ui/Header";
 import Nav from "../ui/Nav";
 import GameGrid from "../games/GameGrid";
 import Search from "../ui/Search";
+import Pagination from "../ui/Pagination";
 
 const Home = () => {
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [filteredResults, setFilteredResults] = useState([]);
   const [searchInput, setSearchInput] = useState("");
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [recordsPerPage] = useState(10);
+
+  const indexOfLastRecord = currentPage * recordsPerPage;
+  const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
+  const currentRecords = items.slice(indexOfFirstRecord, indexOfLastRecord);
+  const nPages = Math.ceil(20);
 
   useEffect(() => {
     const fetchItems = async () => {
@@ -56,9 +65,14 @@ const Home = () => {
       <Search getQuery={searchItems} />
       <GameGrid
         isLoading={isLoading}
-        items={items}
+        items={currentRecords}
         filteredResult={filteredResults}
         searchInput={searchInput}
+      />
+      <Pagination
+        nPages={nPages}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
       />
     </div>
   );
